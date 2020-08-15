@@ -1,10 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Checkout</title>
-</head>
-<body>
-<h3>Ini adalah checkout</h3>
-</body>
-</html>
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element" id="form-wrapper">
+            <form action="" id="form">
+                <div id="user-info">
+                    <div class="form-field">
+                        <input type="text" class="form-control" required name="name" placeholder="Name . .">
+                    </div>
+                    <div class="form-field">
+                        <input type="email" class="form-control" required name="email" placeholder="Email . .">
+                    </div>
+                </div>
+
+                <div id="snipping-info">
+                    <hr>
+                    <p>Shipping Information:</p>
+                    <hr>
+                    <div class="form-field">
+                        <input type="text" name="address" placeholder="Address . ." class="form-control">
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="city" placeholder="Address . ." class="form-control">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" name="state" placeholder="Address . ." class="form-control">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" name="zipcode" placeholder="Address . ." class="form-control">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" name="country" placeholder="Address . ." class="form-control">
+                    </div>
+
+                </div>
+
+                <hr>
+                <input type="submit"  value="Continue" id="form-button" class="btn btn-success btn-block">
+            </form>
+        </div>
+        <br>
+        <div class="box-element hidden" id="payment-info">
+            <small>Paypal Options</small>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="box-element">
+            <a href="{% url 'cart' %}" class="btn btn-outline-dark">Back to Cart</a>
+            <hr>
+            <h3>Order Summary</h3>
+            <hr>
+            {% for item in items %}
+            <div class="cart-row">
+                <div style="flex: 2"><img src="{{ item.product.imageURL }}" alt="" class="row-image"></div>
+                <div style="flex: 2"><p>{{ item.product.name }}</p></div>
+                <div style="flex: 2"><p>Rp.{{ item.product.price }}</p></div>
+                <div style="flex: 2"><p>{{ item.product.quantity }}</p></div>
+            </div>
+            {% endfor %}
+            <hr>
+            <h5>Items : {{ order.get_cart_items }}</h5>
+            <h5>Total : Rp. {{ order.get_cart_total }}</h5>
+        </div>
+    </div>
+</div>
+{% endblock content %}
