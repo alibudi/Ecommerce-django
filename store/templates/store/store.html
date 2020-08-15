@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h3>Ini adalah store</h3>
-</body>
-</html>
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-4">
+        <img class="thumbnail" src="{{ product.imageURL }}" alt="">
+        <div class="box-element product">
+            <h6><b>{{ product.name }}</b></h6>
+            <hr>
+
+            <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+            <a href="javasscript:void(0)" class="btn btn-outline-success">View</a>
+            <h4 style="display: inline-block; float: right"><strong>{{ product.price }}</strong></h4>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock content %}
